@@ -1,3 +1,79 @@
+#Redux Boiler Plate
+Inspired by the DEV Ed youtube channel
+
+Redux -- State container
+store -- The store is globalised state , can access anywhere in app
+action -- what you want to do
+reducer--describes how your actions transform the state into next state
+dispatch-- excute the action
+
+# 1. store stays in index.js
+
+import { createStore } from 'redux';
+const myStore = createStore(
+allReducers,  
+window.**REDUX_DEVTOOLS_EXTENSION** && window.**REDUX_DEVTOOLS_EXTENSION**()
+);
+
+# 2. Reducers
+
+can create many components
+Using switch , case statement and having intialized with state and action. and Returns a object
+ex:-
+const isLoggedInReducer = (state = false, action) => {
+switch (action.type) {
+case 'SIGNIN':
+return !state;
+default:
+return state;
+}
+};
+export default isLoggedInReducer;
+
+combineReducer == combine all reducers
+
+#3 actions
+Says what to do
+returns the type and payload
+
+ex:
+export const decrement = () => {
+return {
+type: 'DECREMENT',
+};
+};
+export const increment5 = (num) => {
+return {
+type: 'INCREMENT5',
+payload: num,
+};
+};
+
+Dispatch
+Dispatch in App.js file
+it excutes the action
+useSelector- hooks to access the redux store
+ex:
+const dispatch = useDispatch();
+const counter = useSelector((state) => state.counter);
+
+<h2>Counter {counter}</h2>
+
+<button
+onClick={() => {
+dispatch(increment());
+}} >
++{' '}
+</button>
+
+#final step
+wrap it up
+use Provider in index.js and wrap App.js in it
+<Provider store={myStore}>
+<App />
+</Provider>
+Provider ==Makes the Redux store available to the connect() calls in the component hierarchy below.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
